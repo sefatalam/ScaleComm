@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.7)
+project(ScaleComm CXX)
+set(CMAKE_CXX_STANDARD 14)
+
+add_library(ScaleComm SHARED client.cpp client.hpp ScaleComm.hpp) 
+find_package(PkgConfig REQUIRED)
+include_directories(/usr/local/include)
+pkg_check_modules(thallium REQUIRED IMPORTED_TARGET thallium) 
+target_link_libraries(ScaleComm PkgConfig::thallium)
+install(TARGETS ScaleComm LIBRARY DESTINATION kommclient.so PUBLIC_HEADER DESTINATION kommclient.hpp)
